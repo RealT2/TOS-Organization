@@ -1,157 +1,92 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+body,
+html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  box-sizing: border-box;
+  font-family: "Inter", sans-serif;
 }
 
-body {
-    background: #000;
-    color: white;
-    font-family: -apple-system, BlinkMacSystemFont, "SF Pro", "Segoe UI", sans-serif;
-    height: 100vh;
-    width: 100vw;
-    overflow: hidden; /* Prevent scrolling to fit screen */
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.container {
+  width: 100%;
+  height: 100%;
 }
 
-/* Background Image */
-.bg-wrapper {
-    position: fixed;
-    top: -5%;
-    left: -5%;
-    width: 110%;
-    height: 110%;
-    z-index: -1;
+.header {
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 20px;
+  text-align: left;
 }
 
-#parallax-bg {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+.time-and-date {
+  width: 183px;
+  background: rgba(0, 0, 0, 0.7);
+  border-radius: 4px;
+  padding: 4px 11px;
 }
 
-/* Status Bar Clock */
-.status-bar {
-    position: absolute;
-    top: 3.5vh;
-    right: 3.5vw;
-    font-size: 20px;
-    font-weight: 500;
-    line-height: 16px;
-    text-shadow: 0px 1px 6px #CCCCCC;
+.menu-label {
+  color: white;
+  font-size: 32px;
+  font-weight: 600;
+  text-align: center;
+  text-shadow: 0px 1px 6px rgba(204, 204, 204, 1);
+  margin: 0;
 }
 
-/* Alert Icon Left */
-.alert-container {
-    position: absolute;
-    left: 2.5vw;
-    top: 38%;
+.main-content {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  background: url("https://app.codigma.io/api/uploads/2026/04/06/asset-c842bcb7-4b37-479e-b8da-3c6d580650e4.png")
+    no-repeat center center/cover;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
-.alert-circle {
-    width: 28px;
-    height: 28px;
-    border: 2px solid #FF3B30;
-    border-radius: 50%;
-    color: #FF3B30;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 900;
-    font-size: 14px;
+.tos-section {
+  width: 514px;
+  backdrop-filter: blur(15px);
+  background: rgba(74, 74, 74, 0.39);
+  border-radius: 15px;
+  box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.2);
+  padding: 20px;
 }
 
-/* Main Viewport Scaling */
-.viewport {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    padding: 20px;
+.tos-title {
+  color: #727272;
+  font-size: 200px;
+  font-weight: 700;
+  line-height: 1;
+  margin: 0 0 20px;
+  text-align: center;
 }
 
-/* Hero Background Text - Plus Lighter */
-.hero-text {
-    position: absolute;
-    top: 45%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: clamp(100px, 15vw, 200px); /* Auto-scaling */
-    font-weight: 700;
-    color: #727272;
-    mix-blend-mode: plus-lighter;
-    letter-spacing: 0;
-    user-select: none;
-    z-index: 1;
-    pointer-events: none;
+.info-box {
+  color: white;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 32px;
+  margin-bottom: 30px;
+  position: relative;
 }
 
-/* Content Grid */
-.content-grid {
-    display: flex;
-    gap: 30px;
-    width: 90%;
-    max-width: 1000px;
-    z-index: 2;
-    margin-top: 50px;
+.separator {
+  border: none;
+  height: 1px;
+  background: rgba(60, 60, 67, 0.29);
+  width: 100%;
+  margin: 30px 0;
 }
 
-/* 1:1 Light & Transparent Glass Card */
-.glass-card {
-    flex: 1;
-    /* Light and way more transparent as requested */
-    background: rgba(255, 255, 255, 0.12); 
-    backdrop-filter: blur(30px);
-    -webkit-backdrop-filter: blur(30px);
-    border-radius: 15px;
-    border: 1px solid #1A1A1A; /* Figma Stroke */
-    /* Figma Shadow Spec: Spread 1, Blur 0, color #000000 20% */
-    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.20); 
-    padding: 30px;
-    min-height: 440px;
-    max-height: 80vh;
-}
-
-.card-inner p {
-    font-size: 18px; /* Slightly adjusted to fit screen better */
-    line-height: 32px;
-    margin-bottom: 24px;
-    font-weight: 500;
-}
-
-.flex-center {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    height: 100%;
-}
-
-/* Discord Icon Style */
-.discord-app-icon {
-    width: 80px;
-    height: 80px;
-    background: linear-gradient(180deg, #8C9EFF 0%, #5865F2 100%);
-    border-radius: 18px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
-    transition: transform 0.2s;
-}
-
-.discord-app-icon:hover {
-    transform: scale(1.05);
-}
-
-/* Responsive Scaling */
-@media (max-width: 768px) {
-    .content-grid { flex-direction: column; overflow-y: auto; height: 70vh; }
-    .hero-text { font-size: 80px; }
-    .glass-card { min-height: auto; }
+.discord-icon {
+  width: 85px;
+  height: 85px;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 10px;
+  opacity: 0.86;
 }
