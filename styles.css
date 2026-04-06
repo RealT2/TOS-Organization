@@ -2,19 +2,19 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
 }
 
 body {
-    font-family: -apple-system, BlinkMacSystemFont, "SF Pro", "Segoe UI", Roboto, sans-serif;
-    color: #FFFFFF;
     background-color: #000;
+    color: #FFFFFF;
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro", sans-serif;
     height: 100vh;
     width: 100vw;
     overflow: hidden;
 }
 
-/* Background Section */
-.background-container {
+.bg-container {
     position: fixed;
     top: -5%;
     left: -5%;
@@ -29,100 +29,102 @@ body {
     object-fit: cover;
 }
 
-/* Status Bar Clock */
+/* 1:1 Clock Specs */
 .status-bar {
     position: absolute;
     top: 30px;
     right: 40px;
     font-size: 20px;
-    line-height: 16px;
-    color: #FFFFFF;
-    text-shadow: 0px 1px 6px #CCCCCC;
-    z-index: 10;
+    line-height: 16px; /* Your Spec */
+    font-weight: 500;
+    text-shadow: 0px 1px 6px #CCCCCC; /* Your Spec */
+    z-index: 100;
 }
 
-/* Main Content */
-.main-wrapper {
+/* 1:1 Alert Icon Specs */
+.alert-icon {
+    position: absolute;
+    left: 20px;
+    top: 37%;
+    width: 28px;
+    height: 28px;
+    background: #FF3B30; /* Solid Red from Image */
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #000;
+    font-weight: 900;
+    font-size: 16px;
+    z-index: 100;
+}
+
+.scene {
     height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding-bottom: 20px;
 }
 
-/* Hero Title: 1:1 Figma Specs */
+/* 1:1 Hero Text Specs */
 .hero-title {
-    font-size: 200px;
-    font-weight: 700;
-    line-height: 32px; /* As specified */
-    color: #727272;
-    mix-blend-mode: plus-lighter;
+    font-size: 200px; /* Your Spec */
+    font-weight: 700; /* Your Spec */
+    color: #727272;   /* Your Spec */
+    mix-blend-mode: plus-lighter; /* Your Spec */
     letter-spacing: 0;
-    margin-bottom: 80px;
-    user-select: none;
+    line-height: 1;
+    margin-bottom: -15px;
     z-index: 1;
 }
 
-/* Grid & Glass Cards */
-.cards-grid {
+.cards-layout {
     display: flex;
-    gap: 30px;
-    max-width: 1100px;
+    gap: 40px;
     width: 90%;
+    max-width: 1050px;
     z-index: 5;
 }
 
+/* 1:1 Glass Card Specs */
 .glass-card {
     flex: 1;
-    background: rgba(74, 74, 74, 0.39);
-    backdrop-filter: blur(30px);
+    background: rgba(74, 74, 74, 0.39); /* Your Spec: 4A4A4A 39% */
+    backdrop-filter: blur(30px); /* Your Spec: 30px */
     -webkit-backdrop-filter: blur(30px);
-    border-radius: 15px;
-    border: 1px solid #1A1A1A; /* Inside Stroke */
-    box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.20); /* Drop shadow: Spread 1 */
-    padding: 30px;
+    border-radius: 15px; /* Your Spec */
+    border: 1px solid #1A1A1A; /* Your Spec: Inside Stroke */
+    box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.20); /* Your Spec: Spread 1, Blur 0 */
+    padding: 35px;
+    min-height: 480px;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    min-height: 450px;
-    transition: transform 0.1s ease-out;
 }
 
-/* Body Text: 1:1 Figma Specs */
+/* 1:1 Body Text Specs */
 .card-text {
-    font-size: 20px;
-    line-height: 32px;
-    letter-spacing: 0;
+    font-size: 20px; /* Your Spec */
+    line-height: 32px; /* Your Spec */
     color: #FFFFFF;
     font-weight: 500;
+    letter-spacing: 0;
 }
 
-/* Discord Icon Styling */
-.discord-container {
+.discord-center {
+    margin-top: auto;
     display: flex;
     justify-content: center;
-    margin-top: 20px;
+    padding-bottom: 10px;
 }
 
-.discord-btn {
-    width: 75px;
-    height: 75px;
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
+.discord-app-icon {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(180deg, #8C9EFF 0%, #5865F2 100%);
     border-radius: 18px;
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
-}
-
-.discord-btn:hover {
-    transform: scale(1.1);
-}
-
-@media (max-width: 800px) {
-    .cards-grid { flex-direction: column; overflow-y: auto; height: 60vh; }
-    .hero-title { font-size: 100px; }
+    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
 }
