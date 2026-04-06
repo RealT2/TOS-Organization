@@ -1,6 +1,6 @@
-// Dynamic Clock to match Image 4
+// Function for Real-time Clock
 function updateClock() {
-    const clock = document.getElementById('clock');
+    const clockElement = document.getElementById('clock');
     const now = new Date();
     
     const options = { 
@@ -8,35 +8,47 @@ function updateClock() {
         month: 'short', 
         day: 'numeric', 
         hour: 'numeric', 
-        minute: '2-digit',
+        minute: '2-digit', 
         hour12: true 
     };
     
-    // Format: Mon Jun 10 9:41 AM
-    let timeStr = now.toLocaleDateString('en-US', options).replace(',', '');
-    clock.textContent = timeStr;
+    // Formatting to match "Mon Jun 10 9:41 AM"
+    let formatted = now.toLocaleString('en-US', options).replace(',', '');
+    clockElement.textContent = formatted;
 }
 
+// Update clock every second
 setInterval(updateClock, 1000);
 updateClock();
 
-// Lively Parallax Movement
+// Lively Movement: Parallax and Tilt Effect
 document.addEventListener('mousemove', (e) => {
-    const bg = document.querySelector('.bg-image');
-    const title = document.querySelector('.main-title');
-    const cards = document.querySelectorAll('.glass-card');
-    
-    const x = (window.innerWidth / 2 - e.pageX) / 40;
-    const y = (window.innerHeight / 2 - e.pageY) / 40;
+    const { clientX, clientY } = e;
+    const centerX = window.innerWidth / 2;
+    const centerY = window.innerHeight / 2;
 
-    // Background moves subtly in opposite direction
-    bg.style.transform = `translate3d(${-x}px, ${-y}px, 0)`;
-    
-    // Title moves slightly
-    title.style.transform = `translate3d(${x * 0.5}px, ${y * 0.5}px, 0)`;
-    
-    // Cards have a floating tilt
+    const moveX = (clientX - centerX) / 50;
+    const moveY = (clientY - centerY) / 50;
+
+    // Background moves subtly
+    const bg = document.querySelector('.parallax-bg');
+    bg.style.transform = `translate(${moveX}px, ${moveY}px) scale(1.05)`;
+
+    // Hero Title moves in opposition
+    const title = document.querySelector('.hero-title');
+    title.style.transform = `translate(${-moveX * 1.5}px, ${-moveY * 1.5}px)`;
+
+    // Glass cards tilt towards mouse
+    const cards = document.querySelectorAll('.glass-card');
     cards.forEach(card => {
-        card.style.transform = `perspective(1000px) rotateX(${-y}deg) rotateY(${x}deg)`;
+        card.style.transform = `perspective(1000px) rotateY(${moveX / 2}deg) rotateX(${-moveY / 2}deg)`;
+    });
+});
+
+// Reset tilt when mouse leaves
+document.addEventListener('mouseleave', () => {
+    const cards = document.querySelectorAll('.glass-card');
+    cards.forEach(card => {
+        card.style.transform = `perspective(1000px) rotateY(0deg) rotateX(0deg)`;
     });
 });
