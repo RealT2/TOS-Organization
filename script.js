@@ -1,5 +1,6 @@
-function updateDateTime() {
-    const dateTimeElement = document.getElementById('date-time');
+// Dynamic Clock to match Image 4
+function updateClock() {
+    const clock = document.getElementById('clock');
     const now = new Date();
     
     const options = { 
@@ -7,33 +8,35 @@ function updateDateTime() {
         month: 'short', 
         day: 'numeric', 
         hour: 'numeric', 
-        minute: '2-digit', 
+        minute: '2-digit',
         hour12: true 
     };
     
-    const formatted = now.toLocaleString('en-US', options).replace(',', '');
-    dateTimeElement.textContent = formatted;
+    // Format: Mon Jun 10 9:41 AM
+    let timeStr = now.toLocaleDateString('en-US', options).replace(',', '');
+    clock.textContent = timeStr;
 }
 
-// Update time every minute
-setInterval(updateDateTime, 1000);
-updateDateTime();
+setInterval(updateClock, 1000);
+updateClock();
 
-// Parallax movement for cards
+// Lively Parallax Movement
 document.addEventListener('mousemove', (e) => {
-    const cards = document.querySelectorAll('.card');
-    const xAxis = (window.innerWidth / 2 - e.pageX) / 50;
-    const yAxis = (window.innerHeight / 2 - e.pageY) / 50;
+    const bg = document.querySelector('.bg-image');
+    const title = document.querySelector('.main-title');
+    const cards = document.querySelectorAll('.glass-card');
     
-    cards.forEach(card => {
-        card.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg) translateY(-5px)`;
-    });
-});
+    const x = (window.innerWidth / 2 - e.pageX) / 40;
+    const y = (window.innerHeight / 2 - e.pageY) / 40;
 
-// Reset card position on mouse leave
-document.addEventListener('mouseleave', () => {
-    const cards = document.querySelectorAll('.card');
+    // Background moves subtly in opposite direction
+    bg.style.transform = `translate3d(${-x}px, ${-y}px, 0)`;
+    
+    // Title moves slightly
+    title.style.transform = `translate3d(${x * 0.5}px, ${y * 0.5}px, 0)`;
+    
+    // Cards have a floating tilt
     cards.forEach(card => {
-        card.style.transform = `rotateY(0deg) rotateX(0deg)`;
+        card.style.transform = `perspective(1000px) rotateX(${-y}deg) rotateY(${x}deg)`;
     });
 });
